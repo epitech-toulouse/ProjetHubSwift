@@ -1,0 +1,58 @@
+{
+	"myPeripheral" : {
+		"name": "PatatOPhone",
+		"services": [
+			{
+				"id": "06caba28-47a0-4d35-b4d9-da7914419c98",
+				"characteristics": [
+					{
+						"id": "9a095327-c1bb-4284-95e6-8a8f91a22317",
+						"properties": [
+							{
+								"value": "read"
+							},
+						],
+					}
+				],
+			},
+		],
+	},
+	"toFindPeripherals": [
+		{
+			"name": "otherPhone",
+			"services": [
+				{
+					"id": "9510e25b-1d30-41bc-a282-89593e801edd",
+					"characteristics": [
+						{
+							"id": "973790a2-5aaa-4783-aff0-28d45f4bbdf5",
+							"properties": [
+								{
+									"value": "read"
+								},
+							],
+						}
+					],
+				},
+			],
+		},
+		{
+			"name": "Bob",
+			"services": [
+				{
+					"id": "9510e25b-1d30-41bc-a282-89593e801edd",
+					"characteristics": [
+						{
+							"id": "973790a2-5aaa-4783-aff0-28d45f4bbdf5",
+							"properties": [
+								{
+									"value": "read"
+								},
+							],
+						}
+					],
+				},
+			],
+		}
+	]
+}
