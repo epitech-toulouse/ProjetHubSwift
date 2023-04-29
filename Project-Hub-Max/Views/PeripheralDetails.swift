@@ -9,7 +9,7 @@ import SwiftUI
 import CoreBluetooth
 
 struct MyPeripheralDetails: View {
-	@State private var serviceSelected: CBService?
+	@State private var serviceSelected: CFService?
 	@EnvironmentObject var ble: Ble
 
 	var body: some View {
@@ -18,10 +18,10 @@ struct MyPeripheralDetails: View {
 			Text("Services of " + peripheral.name)
 			let services = peripheral.services
 			List(services, id: \.self, selection: $serviceSelected) { service in
-				NavigationLink(service.id.uuidString, value: service.id)
+				Text(service.id.uuidString)
 			}
 		} detail: {
-			ServiceDetails(selectServ: $serviceSelected)
+			MyServiceDetails(selectServ: $serviceSelected)
 		}
 		.onAppear {
 			serviceSelected = nil
@@ -64,7 +64,7 @@ fileprivate struct DisplayDetail: View {
 		})
 		if let services = peripheral.cbPeripheral.services {
 			List(services, id: \.self, selection: $serviceSelected) { service in
-				NavigationLink(service.uuid.uuidString, value: service.uuid)
+				Text(service.uuid.uuidString)
 			}
 		}
 	}

@@ -17,7 +17,7 @@ struct MainView: View {
 		NavigationSplitView {
 			Text("Peripherals")
 			List(ble.peripherals, id: \.self, selection: $selectPeri) { peripheral in
-				NavigationLink(peripheral.cbPeripheral.name!, value: peripheral.cbPeripheral.name!)
+				Text(peripheral.cbPeripheral.name!)
 			}
 		} content: {
 			PeripheralDetails(peripheralSelected: $selectPeri, serviceSelected: $selectServ)
@@ -25,7 +25,7 @@ struct MainView: View {
 					selectServ = nil
 				}
 		} detail: {
-			ServiceDetails(selectServ: $selectServ)
+			ServiceDetails(selectServ: $selectServ, peripheralSelected: $selectPeri)
 		}
 	}
 }

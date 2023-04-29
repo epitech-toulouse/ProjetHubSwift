@@ -49,4 +49,18 @@ extension Ble: CBPeripheralDelegate {
 	public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
 		self.delegate?.didWriteValue(on: characteristic)
 	}
+
+	public func readCharacteristic(with id: CBUUID, from peripheral: Peripheral) {
+		guard let services = peripheral.cbPeripheral.services else { return }
+
+		var characteristic: CBCharacteristic? = nil
+		for service in services {
+			guard let char = service.characteristics?.first(where: {$0.uuid == id}) else { continue }
+
+			characteristic = char
+			break
+		}
+		guard (characteristic != nil) else { return }
+		peripheral.cbPeripheral.readValue(for: characteristic!)
+	}
 }

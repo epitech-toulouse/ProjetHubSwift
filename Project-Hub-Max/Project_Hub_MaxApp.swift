@@ -69,6 +69,6 @@ extension Project_Hub_MaxApp: BleDelegate {
 	}
 
 	func didReceiveUpdate(content: String) {
-		print("received uodate \(content)")
+		print("received update \(content)")
 	}
 }
