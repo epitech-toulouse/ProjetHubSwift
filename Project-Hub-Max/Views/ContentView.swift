@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-	@State private var selectPeri: CFPeripheral? = nil
-	@State private var selectServ: CFService? = nil
-	@Binding var myPeripheral: CFPeripheral?
-
     var body: some View {
 		TabView {
-			MainView(selectPeri: $selectPeri, selectServ: $selectServ)
+			MainView()
 				.tabItem {
 					Label("Menu", systemImage: "list.dash")
 				}
-			MyPeripheralDetails(selectPeripheral: $myPeripheral, serviceSelected: $selectServ)
+			MyPeripheralDetails()
 				.tabItem {
 					Label("My Services", systemImage: "person.crop.circle")
 				}

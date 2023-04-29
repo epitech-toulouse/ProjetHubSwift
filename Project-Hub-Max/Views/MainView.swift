@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import CoreBluetooth
 
 struct MainView: View {
-	@Binding var selectPeri: CFPeripheral?
-	@Binding var selectServ: CFService?
+	@State private var selectPeri: Peripheral?
+	@State private var selectServ: CBService?
 	@EnvironmentObject var ble: Ble
 
 	var body: some View {

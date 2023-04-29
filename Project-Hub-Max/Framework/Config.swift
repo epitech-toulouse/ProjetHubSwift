@@ -72,10 +72,12 @@ public struct CFPeripheral: Decodable, Hashable {
 public struct CFService: Decodable, Hashable {
 	public let id: UUID
 	public let characteristics: [CFCharacteristic]
+	public let primary: Bool
 
 	private enum CodingKeys: CodingKey {
 		case id
 		case characteristics
+		case primary
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -83,6 +85,7 @@ public struct CFService: Decodable, Hashable {
 
 		self.id = try container.decode(UUID.self, forKey: .id)
 		self.characteristics = try container.decodeIfPresent([CFCharacteristic].self, forKey: .characteristics) ?? []
+		self.primary = try container.decodeIfPresent(Bool.self, forKey: .primary) ?? false
 	}
 
 	public static func == (lhs: CFService, rhs: CFService) -> Bool {

@@ -6,23 +6,19 @@
 //
 
 import SwiftUI
+import CoreBluetooth
 
 struct ServiceDetails: View {
-	@Binding var selectServ: CFService?
+	@Binding var selectServ: CBService?
 
     var body: some View {
-		if let serv = selectServ {
-			Text("Characteristics of " + serv.id.uuidString)
+		if let serv = selectServ, let characteristics = serv.characteristics {
+			Text("Characteristics of \(serv.uuid.uuidString)")
+			List(characteristics, id: \.self) { charac in
+				Text(charac.uuid.uuidString)
+			}
 		} else {
 			Text("Select a service")
 		}
-    }
-}
-
-struct ServideDetails_Previews: PreviewProvider {
-	@State static private var select: CFService? = nil
-
-    static var previews: some View {
-        ServiceDetails(selectServ: $select)
     }
 }

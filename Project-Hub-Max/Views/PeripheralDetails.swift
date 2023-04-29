@@ -6,14 +6,20 @@
 //
 
 import SwiftUI
+import CoreBluetooth
 
 struct MyPeripheralDetails: View {
-	@Binding var selectPeripheral: CFPeripheral?
-	@Binding var serviceSelected: CFService?
+	@State private var serviceSelected: CBService?
+	@EnvironmentObject var ble: Ble
 
 	var body: some View {
+		let peripheral = ble.config.myPeripheral
 		NavigationSplitView {
-			PeripheralDetails(peripheralSelected: $selectPeripheral, serviceSelected: $serviceSelected)
+			Text("Services of " + peripheral.name)
+			let services = peripheral.services
+			List(services, id: \.self, selection: $serviceSelected) { service in
+				NavigationLink(service.id.uuidString, value: service.id)
+			}
 		} detail: {
 			ServiceDetails(selectServ: $serviceSelected)
 		}
@@ -21,31 +27,45 @@ struct MyPeripheralDetails: View {
 			serviceSelected = nil
 		}
 	}
-
 }
 
 struct PeripheralDetails: View {
-	@Binding var peripheralSelected: CFPeripheral?
-	@Binding var serviceSelected: CFService?
+	@Binding var peripheralSelected: Peripheral?
+	@Binding var serviceSelected: CBService?
 	@EnvironmentObject var ble: Ble
-	
+
     var body: some View {
 		if let peripheral = peripheralSelected {
-			DisplayDetail(peripheral: peripheral, serviceSelected: $serviceSelected)
+			if ble.connectionStatus[peripheral] == .Connected {
+				DisplayDetail(peripheral: peripheral, serviceSelected: $serviceSelected)
+			} else if ble.connectionStatus[peripheral] == .Connecting {
+				ProgressView()
+				Text("Connecting...")
+			} else {
+				Button("Connect to peripheral \(peripheral.cbPeripheral.name!)", action: {
+					ble.connectToPeripheral(peripheral: peripheral)
+				})
+			}
 		} else {
-			DisplayDetail(peripheral: ble.config.myPeripheral, serviceSelected: $serviceSelected)
+			Text("Select a peripheral to continue")
 		}
     }
 }
 
 fileprivate struct DisplayDetail: View {
-	let peripheral: CFPeripheral
-	@Binding var serviceSelected: CFService?
+	let peripheral: Peripheral
+	@Binding var serviceSelected: CBService?
+	@EnvironmentObject var ble: Ble
 
 	var body: some View {
-		Text("Services of " + peripheral.name)
-		List(peripheral.services, id: \.self, selection: $serviceSelected) { service in
-			NavigationLink(service.id.uuidString, value: service.id)
+		Text("Services of " + peripheral.cbPeripheral.name!)
+		Button("Disconnect", action: {
+			ble.disconnectFromPeripheral(peripheral: peripheral)
+		})
+		if let services = peripheral.cbPeripheral.services {
+			List(services, id: \.self, selection: $serviceSelected) { service in
+				NavigationLink(service.uuid.uuidString, value: service.uuid)
+			}
 		}
 	}
 }

@@ -8,7 +8,7 @@
 import Foundation
 import CoreBluetooth
 
-extension Ble: CBCentralManagerDelegate, CBPeripheralDelegate {
+extension Ble: CBCentralManagerDelegate {
 	public func centralManagerDidUpdateState(_ central: CBCentralManager) {
 		if central.state == .poweredOn {
 			central.scanForPeripherals(withServices: nil)
@@ -37,10 +37,18 @@ extension Ble: CBCentralManagerDelegate, CBPeripheralDelegate {
 		let options = [CBConnectPeripheralOptionNotifyOnConnectionKey : true,
 					 CBConnectPeripheralOptionNotifyOnNotificationKey : true,
 					CBConnectPeripheralOptionNotifyOnDisconnectionKey : true]
-		
+
+		self.connectionStatus[peripheral] = .Connecting
+
 		self.centralManager?.connect(peripheral.cbPeripheral, options: options)
 
 		self.delegate?.didConnectToPeripheral(peripheral: peripheral)
+	}
+
+	public func disconnectFromPeripheral(peripheral: Peripheral) {
+		self.centralManager?.cancelPeripheralConnection(peripheral.cbPeripheral)
+
+		self.connectionStatus[peripheral] = .Disconnected
 	}
 
 	public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -55,6 +63,7 @@ extension Ble: CBCentralManagerDelegate, CBPeripheralDelegate {
 		guard let myPeripheral = self.peripherals.first(where: {$0.cbPeripheral == peripheral}) else {
 			return
 		}
+		self.connectionStatus[myPeripheral] = .Aborted
 		self.delegate?.didFailedToConnect(to: myPeripheral)
 	}
 }

@@ -15,9 +15,14 @@ public class Ble: NSObject, ObservableObject {
 	public let config: Config
 
 	@Published public var peripherals: [Peripheral] = []
+
+	@Published public var connectionStatus: [Peripheral : ConnectionStatus] = [:]
+
 	public var connectedPeripherals: [Peripheral] {
 		return self.peripherals.filter({$0.cbPeripheral.state == .connected})
 	}
+
+	internal var myServices: [CBMutableService] = []
 
 	public var delegate: BleDelegate?
 

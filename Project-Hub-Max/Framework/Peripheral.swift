@@ -15,6 +15,13 @@ public struct Color {
 	public let a: Double
 }
 
+public enum ConnectionStatus: String {
+	case Disconnected
+	case Connected
+	case Aborted
+	case Connecting
+}
+
 public class Peripheral: Hashable {
 	public let cfPeripheral: CFPeripheral?
 	public let cbPeripheral: CBPeripheral
@@ -25,8 +32,9 @@ public class Peripheral: Hashable {
 		self.cfPeripheral = cfPeripheral
 		self.cbPeripheral = cbPeripheral
 
-		textColor = cfPeripheral == nil ? Color(r: 255, g: 0, b: 0, a: 255) : Color(r: 0, g: 0, b: 255, a: 255)
+		self.textColor = cfPeripheral == nil ? Color(r: 255, g: 0, b: 0, a: 255) : Color(r: 0, g: 0, b: 255, a: 255)
 	}
+
 	public static func == (lhs: Peripheral, rhs: Peripheral) -> Bool {
 		return lhs.cfPeripheral == rhs.cfPeripheral && lhs.cbPeripheral == rhs.cbPeripheral
 	}

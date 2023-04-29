@@ -4,12 +4,22 @@
 		"services": [
 			{
 				"id": "06caba28-47a0-4d35-b4d9-da7914419c98",
+				"primary": true,
 				"characteristics": [
 					{
 						"id": "9a095327-c1bb-4284-95e6-8a8f91a22317",
 						"properties": [
 							{
 								"value": "read"
+							},
+							{
+								"value": "write"
+							},
+							{
+								"value": "writeWithoutResponse"
+							},
+							{
+								"value": "notify"
 							},
 						],
 					}
