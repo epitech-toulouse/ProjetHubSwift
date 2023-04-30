@@ -33,7 +33,11 @@ struct Project_Hub_MaxApp: App {
 
 extension Project_Hub_MaxApp: BleDelegate {
 	func didConnectToPeripheral(peripheral: Peripheral) {
-		print("did connect to peripheral")
+		print("did connect to peripheral \(String(describing: peripheral.cbPeripheral.name))")
+	}
+
+	func didGotDisconnected(from peripheral: Peripheral) {
+		print("Did got disconected from \(String(describing: peripheral.cbPeripheral.name))")
 	}
 
 	func didDiscoverPeripheral(discovered peripheral: Peripheral) {

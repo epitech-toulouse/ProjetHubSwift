@@ -39,7 +39,7 @@ struct ServiceDetails: View {
 			List(characteristics, id: \.self) { charac in
 				Text(charac.uuid.uuidString)
 				if charac.properties.contains(.read) {
-					Button("Read value", action: {
+					Button("Read value ==> \(ble.readContent[charac] ?? "")", action: {
 						ble.readCharacteristic(with: charac.uuid, from: peripheralSelected!)
 					})
 				}

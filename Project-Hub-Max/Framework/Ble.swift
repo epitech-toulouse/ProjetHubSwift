@@ -18,6 +18,8 @@ public class Ble: NSObject, ObservableObject {
 
 	@Published public var connectionStatus: [Peripheral : ConnectionStatus] = [:]
 
+	@Published public var readContent: [CBCharacteristic : String] = [:]
+
 	public var connectedPeripherals: [Peripheral] {
 		return self.peripherals.filter({$0.cbPeripheral.state == .connected})
 	}

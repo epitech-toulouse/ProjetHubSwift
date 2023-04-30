@@ -42,6 +42,9 @@ struct PeripheralDetails: View {
 				ProgressView()
 				Text("Connecting...")
 			} else {
+				if ble.connectionStatus[peripheral] == .Aborted {
+					Text("We got disconnected by the peripheral " + (peripheral.cbPeripheral.name ?? ""))
+				}
 				Button("Connect to peripheral \(peripheral.cbPeripheral.name!)", action: {
 					ble.connectToPeripheral(peripheral: peripheral)
 				})

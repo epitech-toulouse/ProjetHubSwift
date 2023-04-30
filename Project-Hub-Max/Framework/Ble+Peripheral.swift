@@ -23,13 +23,15 @@ extension Ble: CBPeripheralDelegate {
 	public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
 		guard let characteristics = service.characteristics else { return }
 
-		for characteristic in characteristics {
-			if characteristic.properties.contains(.notify) {
-				peripheral.setNotifyValue(true, for: characteristic)
-			}
-		}
 		guard let peri = self.peripherals.first(where: {$0.cbPeripheral == peripheral}) else { return }
 
+		if peri.cfPeripheral != nil {
+			for characteristic in characteristics {
+				if characteristic.properties.contains(.notify) {
+					peripheral.setNotifyValue(true, for: characteristic)
+				}
+			}
+		}
 		self.connectionStatus[peri] = .Connected
 	}
 
@@ -43,6 +45,7 @@ extension Ble: CBPeripheralDelegate {
 
 		guard let message = String(data: data, encoding: .utf8) else { return }
 
+		self.readContent[characteristic] = message
 		self.delegate?.didReceiveUpdate(content: message)
 	}
 

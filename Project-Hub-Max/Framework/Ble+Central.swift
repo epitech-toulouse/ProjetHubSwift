@@ -41,11 +41,10 @@ extension Ble: CBCentralManagerDelegate {
 		self.connectionStatus[peripheral] = .Connecting
 
 		self.centralManager?.connect(peripheral.cbPeripheral, options: options)
-
-		self.delegate?.didConnectToPeripheral(peripheral: peripheral)
 	}
 
 	public func disconnectFromPeripheral(peripheral: Peripheral) {
+		self.removeServices(of: peripheral)
 		self.centralManager?.cancelPeripheralConnection(peripheral.cbPeripheral)
 
 		self.connectionStatus[peripheral] = .Disconnected
@@ -53,6 +52,10 @@ extension Ble: CBCentralManagerDelegate {
 
 	public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
 		peripheral.delegate = self
+
+		guard let myPeripheral = self.peripherals.first(where: {$0.cbPeripheral == peripheral}) else { return }
+
+		self.delegate?.didConnectToPeripheral(peripheral: myPeripheral)
 
 		peripheral.discoverServices(nil)
 	}
@@ -65,5 +68,26 @@ extension Ble: CBCentralManagerDelegate {
 		}
 		self.connectionStatus[myPeripheral] = .Aborted
 		self.delegate?.didFailedToConnect(to: myPeripheral)
+	}
+
+	public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+		guard let myPeripheral = self.peripherals.first(where: {$0.cbPeripheral == peripheral}) else {
+			return
+		}
+		self.removeServices(of: myPeripheral)
+		self.connectionStatus[myPeripheral] = .Aborted
+		self.delegate?.didGotDisconnected(from: myPeripheral)
+	}
+
+	private func removeServices(of peripheral: Peripheral) {
+		if let services = peripheral.cbPeripheral.services {
+			for service in services {
+				if let characteristics = service.characteristics {
+					for characteristic in characteristics {
+						self.readContent.removeValue(forKey: characteristic)
+					}
+				}
+			}
+		}
 	}
 }

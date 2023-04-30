@@ -12,6 +12,7 @@ public protocol BleDelegate {
 	func didConnectToPeripheral(peripheral: Peripheral)
 	func didDiscoverPeripheral(discovered peripheral: Peripheral)
 	func didFailedToConnect(to peripheral: Peripheral)
+	func didGotDisconnected(from peripheral: Peripheral)
 
 	func didStartAdvertising(peripheral: CBPeripheralManager)
 	func didSubscribeTo(characteristic: CBCharacteristic)
