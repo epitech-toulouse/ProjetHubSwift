@@ -66,4 +66,14 @@ extension Ble: CBPeripheralDelegate {
 		guard (characteristic != nil) else { return }
 		peripheral.cbPeripheral.readValue(for: characteristic!)
 	}
+
+	public func writeToCharacteristic(data: String, characteristic: CBCharacteristic, type: CBCharacteristicWriteType, from peripheral: Peripheral) {
+		guard let dataD = data.data(using: .utf8) else { return }
+
+		peripheral.cbPeripheral.writeValue(dataD, for: characteristic, type: type)
+	}
+
+	public func subscribeToCharacteristic(from peripheral: Peripheral, characteristic: CBCharacteristic) {
+		peripheral.cbPeripheral.setNotifyValue(true, for: characteristic)
+	}
 }

@@ -75,7 +75,7 @@ extension Ble: CBCentralManagerDelegate {
 			return
 		}
 		self.removeServices(of: myPeripheral)
-		self.connectionStatus[myPeripheral] = .Aborted
+		self.connectionStatus[myPeripheral] = .Disconnected
 		self.delegate?.didGotDisconnected(from: myPeripheral)
 	}
 
