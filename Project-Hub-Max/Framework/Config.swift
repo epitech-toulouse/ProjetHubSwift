@@ -2,13 +2,15 @@
 //  BleConfig.swift
 //  Project-Hub-Max
 //
-//  Created by Raphael Labourel on 27/04/2023.
-//
+
 
 import Foundation
 
+/// This struct is the  object of the json file
 public struct Config: Decodable {
+	/// Representing my peripheral
 	public let myPeripheral: CFPeripheral
+	/// Representing the peropheral I would like to connect to automatically
 	public let toFindPeripherals: [CFPeripheral]?
 
 	public init(from configFile: URL?) throws {
@@ -39,7 +41,9 @@ public struct Config: Decodable {
 }
 
 public struct CFPeripheral: Decodable, Hashable {
+	/// The name of the peripheral that will be used to adverstise
 	public let name: String
+	/// The list of all the services it will use and create
 	public let services: [CFService]
 
 	private enum CodingKeys: CodingKey {
@@ -70,8 +74,11 @@ public struct CFPeripheral: Decodable, Hashable {
 }
 
 public struct CFService: Decodable, Hashable {
+	/// The id of the service
 	public let id: UUID
+	//// The characteristics list of the service
 	public let characteristics: [CFCharacteristic]
+	/// Is the service primary ?
 	public let primary: Bool
 
 	private enum CodingKeys: CodingKey {
@@ -99,7 +106,9 @@ public struct CFService: Decodable, Hashable {
 }
 
 public struct CFCharacteristic: Decodable, Hashable {
+	/// The id of the characteristic to create
 	public let id: UUID
+	/// A list of propery defining the usage of the characteristic
 	public let properties: [CFProperty]
 
 	private enum CodingKeys: CodingKey {

@@ -58,7 +58,7 @@ extension LogKit {
 
             return dictionary
         } catch {
-            self.error(message: "Unable to open the data file, creating a new one")
+            print("Unable to open the data file, creating a new one")
             return [:]
         }
     }

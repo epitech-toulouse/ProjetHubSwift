@@ -84,6 +84,9 @@ extension Ble: CBCentralManagerDelegate {
 		self.delegate?.didGotDisconnected(from: myPeripheral)
 	}
 
+	/// Relove all services of one peripheral
+	/// - Parameters:
+	///  - peripheral: the peripheral to remove all known services of
 	private func removeServices(of peripheral: Peripheral) {
 		if let services = peripheral.cbPeripheral.services {
 			for service in services {

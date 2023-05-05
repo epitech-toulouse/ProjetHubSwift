@@ -29,10 +29,12 @@ extension LogKit {
     /// - Parameters:
     ///    - log:  A `String`that will be **appended** to the log file
     private func writeToFile(log: String) {
+		defer {
+			self.isUpdating = false
+		}
         DispatchQueue.main.async {
             guard let data = log.data(using: .utf8) else {
                 self.critical(message: "Unable to convert string to data")
-				self.isUpdating = false
                 return
             }
             if FileManager.default.fileExists(atPath: self.logFileURL.path) {
@@ -42,13 +44,11 @@ extension LogKit {
                     try fileHandle.write(contentsOf: data)
                     try fileHandle.close()
                 } catch {
-					self.isUpdating = false
                     return
                 }
             } else {
                 FileManager.default.createFile(atPath: self.logFileURL.path, contents: data)
             }
-			self.isUpdating = false
         }
         
     }

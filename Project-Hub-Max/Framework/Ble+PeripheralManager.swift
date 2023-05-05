@@ -17,6 +17,7 @@ extension Ble: CBPeripheralManagerDelegate {
 		}
 	}
 
+    /// This method init all the services detailed in the config file
 	private func initService() {
 		self.peripheralManager?.removeAllServices()
 		for service in self.config.myPeripheral.services {
@@ -27,6 +28,10 @@ extension Ble: CBPeripheralManagerDelegate {
 		}
 	}
 
+    /// This method create all the characteritics detaileed in the config file for one service
+    /// - Parameters:
+    ///   - service: the service to create the characteristic of
+    ///   - cfService: the config service containing the information needed to create the characteristic
 	private func createCharacteristics(for service: CBMutableService, using cfService: CFService) {
 		let permissions: CBAttributePermissions = [.readable, .writeable]
 		var cbCharacteristics: [CBCharacteristic] = []

@@ -20,6 +20,7 @@ public enum ConnectionStatus: String {
 	case Connecting
 }
 
+/// Wrapper of cbPeripheral and cfPeripheral
 public class Peripheral: Hashable {
 	public let cfPeripheral: CFPeripheral?
 	public let cbPeripheral: CBPeripheral
