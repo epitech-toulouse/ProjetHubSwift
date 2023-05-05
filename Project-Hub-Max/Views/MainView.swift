@@ -19,6 +19,9 @@ struct MainView: View {
 			List(ble.peripherals, id: \.self, selection: $selectPeri) { peripheral in
 				Text(peripheral.cbPeripheral.name!)
 			}
+			.refreshable {
+				ble.refreshPeripheralList()
+			}
 		} content: {
 			PeripheralDetails(peripheralSelected: $selectPeri, serviceSelected: $selectServ)
 				.onAppear {

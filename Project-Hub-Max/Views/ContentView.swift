@@ -18,7 +18,7 @@ struct ContentView: View {
 				.tabItem {
 					Label("My Services", systemImage: "person.crop.circle")
 				}
-			Interract()
+			LogView()
 				.tabItem {
 					Label("Interract", systemImage: "square.and.pencil")
 				}

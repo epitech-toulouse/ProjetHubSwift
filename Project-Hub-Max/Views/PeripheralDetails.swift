@@ -9,19 +9,20 @@ import SwiftUI
 import CoreBluetooth
 
 struct MyPeripheralDetails: View {
-	@State private var serviceSelected: CFService?
+	@State private var serviceSelected: CBService?
+	@State private var perif: Peripheral? = nil
 	@EnvironmentObject var ble: Ble
 
 	var body: some View {
 		let peripheral = ble.config.myPeripheral
 		NavigationSplitView {
 			Text("Services of " + peripheral.name)
-			let services = peripheral.services
+			let services = ble.myServices as [CBService]
 			List(services, id: \.self, selection: $serviceSelected) { service in
-				Text(service.id.uuidString)
+				Text(service.uuid.uuidString)
 			}
 		} detail: {
-			MyServiceDetails(selectServ: $serviceSelected)
+			ServiceDetails(selectServ: $serviceSelected, peripheralSelected: $perif)
 		}
 		.onAppear {
 			serviceSelected = nil

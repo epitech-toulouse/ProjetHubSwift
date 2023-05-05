@@ -76,6 +76,11 @@ extension Ble: CBCentralManagerDelegate {
 		}
 		self.removeServices(of: myPeripheral)
 		self.connectionStatus[myPeripheral] = .Disconnected
+		if let error = error {
+			if error.localizedDescription.contains("The specified device has disconnected from us.") {
+				self.connectionStatus[myPeripheral] = .Aborted
+			}
+		}
 		self.delegate?.didGotDisconnected(from: myPeripheral)
 	}
 

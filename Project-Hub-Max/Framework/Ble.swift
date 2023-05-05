@@ -2,8 +2,7 @@
 //  Ble.swift
 //  Project-Hub-Max
 //
-//  Created by Raphael Labourel on 27/04/2023.
-//
+
 
 import Foundation
 import CoreBluetooth
@@ -19,6 +18,8 @@ public class Ble: NSObject, ObservableObject {
 	@Published public var connectionStatus: [Peripheral : ConnectionStatus] = [:]
 
 	@Published public var readContent: [CBCharacteristic : String] = [:]
+
+	@Published public var myCharactersticsValues: [CBCharacteristic : String] = [:]
 
 	public var connectedPeripherals: [Peripheral] {
 		return self.peripherals.filter({$0.cbPeripheral.state == .connected})
@@ -47,5 +48,13 @@ public class Ble: NSObject, ObservableObject {
 
 		self.centralManager = CBCentralManager(delegate: self, queue: self.centralDispatchQueue)
 		self.peripheralManager = CBPeripheralManager(delegate: self, queue: self.peripheralManagerDispatchQueue)
+	}
+
+	public func refreshPeripheralList() {
+		self.peripherals = []
+		self.connectionStatus = [:]
+		self.readContent = [:]
+		self.centralManager?.stopScan()
+		self.centralManager?.scanForPeripherals(withServices: nil)
 	}
 }

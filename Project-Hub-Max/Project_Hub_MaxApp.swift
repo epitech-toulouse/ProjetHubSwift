@@ -2,8 +2,7 @@
 //  Project_Hub_MaxApp.swift
 //  Project-Hub-Max
 //
-//  Created by Raphael Labourel on 27/04/2023.
-//
+
 
 import SwiftUI
 import CoreBluetooth
@@ -15,6 +14,7 @@ enum BleError: Error {
 @main
 struct Project_Hub_MaxApp: App {
 	@ObservedObject var ble: Ble
+	@ObservedObject var logger: LogKit = LogKit()
 
 	init() {
 		let url = Bundle.main.url(forResource: "bleConfig", withExtension: "json")
@@ -27,17 +27,23 @@ struct Project_Hub_MaxApp: App {
         WindowGroup {
 			ContentView()
 				.environmentObject(ble)
+				.environmentObject(logger)
         }
     }
 }
 
 extension Project_Hub_MaxApp: BleDelegate {
 	func didConnectToPeripheral(peripheral: Peripheral) {
-		print("did connect to peripheral \(String(describing: peripheral.cbPeripheral.name))")
+		self.logger.log(message: "Successfully connected to \(String(describing: peripheral.cbPeripheral.name))")
 	}
 
 	func didGotDisconnected(from peripheral: Peripheral) {
-		print("Did got disconected from \(String(describing: peripheral.cbPeripheral.name))")
+		if ble.connectionStatus[peripheral] == .Aborted {
+			self.logger.error(message: "The peripheral \(String(describing: peripheral.cbPeripheral.name)) disconnected from us")
+		} else {
+			self.logger.log(message: "The peripheral \(String(describing: peripheral.cbPeripheral.name)) disconnected from us")
+		}
+
 	}
 
 	func didDiscoverPeripheral(discovered peripheral: Peripheral) {
@@ -45,34 +51,36 @@ extension Project_Hub_MaxApp: BleDelegate {
 	}
 
 	func didFailedToConnect(to peripheral: Peripheral) {
-
+		self.logger.error(message: "Failed to establish a connection with \(String(describing: peripheral.cbPeripheral.name))")
 	}
 
 	func didStartAdvertising(peripheral: CBPeripheralManager) {
-		print("did start adv")
+		self.logger.info(message: "Did start advertising as \(ble.config.myPeripheral.name)")
 	}
 
 	func didSubscribeTo(characteristic: CBCharacteristic) {
-		print("did sub to")
+		self.logger.log(message: "Successfully subscribe to \(String(describing: characteristic.uuid.uuidString))")
 	}
 
 	func didUnsubscribeFrom(characteristic: CBCharacteristic) {
-		print("did unsub to")
+		self.logger.log(message: "Successfully unsubscribe from \(String(describing: characteristic.uuid.uuidString))")
 	}
 
 	func didReceiveWrite(on characteristic: CBCharacteristic) {
-		print("did receive write")
+		guard let value = characteristic.value else { return }
+
+		self.logger.log(message: "Did receive write \(String(describing: String(data: value, encoding: .utf8))) on characteristic \(characteristic.uuid.uuidString)")
 	}
 
 	func didReceiveRead(on characteristic: CBCharacteristic) {
-		print("did receive read")
+		self.logger.log(message: "Characteristic \(characteristic.uuid.uuidString) got read")
 	}
 
-	func didWriteValue(on characteristic: CBCharacteristic) {
-		print("did write")
+	func didWriteValue(on characteristic: CBCharacteristic, content: String) {
+		self.logger.log(message: "Successfully write \(content) into \(characteristic.uuid.uuidString))")
 	}
 
-	func didReceiveUpdate(content: String) {
-		print("received update \(content)")
+	func didReceiveUpdate(content: String, for characteristic: CBCharacteristic) {
+		self.logger.log(message: "Value updated to \(content) for characteristic \(characteristic.uuid.uuidString)")
 	}
 }

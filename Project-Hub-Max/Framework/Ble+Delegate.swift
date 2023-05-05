@@ -20,7 +20,7 @@ public protocol BleDelegate {
 	func didReceiveWrite(on characteristic: CBCharacteristic)
 	func didReceiveRead(on characteristic: CBCharacteristic)
 
-	func didWriteValue(on characteristic: CBCharacteristic)
+	func didWriteValue(on characteristic: CBCharacteristic, content: String)
 
-	func didReceiveUpdate(content: String)
+	func didReceiveUpdate(content: String, for characteristic: CBCharacteristic)
 }

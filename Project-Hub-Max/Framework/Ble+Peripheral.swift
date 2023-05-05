@@ -2,8 +2,7 @@
 //  Ble+Peripheral.swift
 //  Project-Hub-Max
 //
-//  Created by Raphael Labourel on 28/04/2023.
-//
+
 
 import Foundation
 import CoreBluetooth
@@ -46,11 +45,13 @@ extension Ble: CBPeripheralDelegate {
 		guard let message = String(data: data, encoding: .utf8) else { return }
 
 		self.readContent[characteristic] = message
-		self.delegate?.didReceiveUpdate(content: message)
+		self.delegate?.didReceiveUpdate(content: message, for: characteristic)
 	}
 
 	public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-		self.delegate?.didWriteValue(on: characteristic)
+		guard let value = characteristic.value, let message: String = String(data: value, encoding: .utf8) else { return }
+
+		self.delegate?.didWriteValue(on: characteristic, content: message)
 	}
 
 	public func readCharacteristic(with id: CBUUID, from peripheral: Peripheral) {
@@ -71,6 +72,14 @@ extension Ble: CBPeripheralDelegate {
 		guard let dataD = data.data(using: .utf8) else { return }
 
 		peripheral.cbPeripheral.writeValue(dataD, for: characteristic, type: type)
+	}
+
+	public func updateCharacteristic(characteristic: CBCharacteristic, with value: String) {
+		guard let data = value.data(using: .utf8) else { return }
+		guard let characteristicMut = characteristic as? CBMutableCharacteristic else { return }
+
+		self.peripheralManager?.updateValue(data, for: characteristicMut, onSubscribedCentrals: nil)
+		self.myCharactersticsValues[characteristic] = value
 	}
 
 	public func subscribeToCharacteristic(from peripheral: Peripheral, characteristic: CBCharacteristic) {

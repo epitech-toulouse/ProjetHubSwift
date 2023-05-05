@@ -11,6 +11,9 @@
 		AE2AD5A929FBFAFA00E44AF5 /* Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2AD5A829FBFAFA00E44AF5 /* Peripheral.swift */; };
 		AE5F6C1A29FAF14500FE107E /* Ble+PeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F6C1929FAF14500FE107E /* Ble+PeripheralManager.swift */; };
 		AE6F454329FC326300BD2E60 /* Ble+Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6F454229FC326300BD2E60 /* Ble+Peripheral.swift */; };
+		AEBE0EA12A052A5500EB603C /* LogKitClass+DataFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE0E9E2A052A5500EB603C /* LogKitClass+DataFile.swift */; };
+		AEBE0EA22A052A5500EB603C /* LogKitClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE0E9F2A052A5500EB603C /* LogKitClass.swift */; };
+		AEBE0EA32A052A5500EB603C /* LogKitClass+LogFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBE0EA02A052A5500EB603C /* LogKitClass+LogFile.swift */; };
 		AEFD199A29FAA46A004D52A3 /* Project_Hub_MaxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD199929FAA46A004D52A3 /* Project_Hub_MaxApp.swift */; };
 		AEFD199C29FAA46A004D52A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD199B29FAA46A004D52A3 /* ContentView.swift */; };
 		AEFD199E29FAA46A004D52A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEFD199D29FAA46A004D52A3 /* Assets.xcassets */; };
@@ -27,9 +30,9 @@
 		AEFD19D829FABA8C004D52A3 /* ServiceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19D729FABA8C004D52A3 /* ServiceDetails.swift */; };
 		AEFD19D929FABA8C004D52A3 /* ServiceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19D729FABA8C004D52A3 /* ServiceDetails.swift */; };
 		AEFD19DA29FABA8C004D52A3 /* ServiceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19D729FABA8C004D52A3 /* ServiceDetails.swift */; };
-		AEFD19DC29FABCE7004D52A3 /* Interract.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19DB29FABCE7004D52A3 /* Interract.swift */; };
-		AEFD19DD29FABCE7004D52A3 /* Interract.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19DB29FABCE7004D52A3 /* Interract.swift */; };
-		AEFD19DE29FABCE7004D52A3 /* Interract.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19DB29FABCE7004D52A3 /* Interract.swift */; };
+		AEFD19DC29FABCE7004D52A3 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19DB29FABCE7004D52A3 /* LogView.swift */; };
+		AEFD19DD29FABCE7004D52A3 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19DB29FABCE7004D52A3 /* LogView.swift */; };
+		AEFD19DE29FABCE7004D52A3 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19DB29FABCE7004D52A3 /* LogView.swift */; };
 		AEFD19E129FABDC5004D52A3 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19E029FABDC5004D52A3 /* Config.swift */; };
 		AEFD19E229FABDC5004D52A3 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19E029FABDC5004D52A3 /* Config.swift */; };
 		AEFD19E329FABDC5004D52A3 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD19E029FABDC5004D52A3 /* Config.swift */; };
@@ -68,6 +71,9 @@
 		AE5F6C1929FAF14500FE107E /* Ble+PeripheralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ble+PeripheralManager.swift"; sourceTree = "<group>"; usesTabs = 0; };
 		AE6F454229FC326300BD2E60 /* Ble+Peripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ble+Peripheral.swift"; sourceTree = "<group>"; };
 		AEAC6E5429FAF57600DE7CB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AEBE0E9E2A052A5500EB603C /* LogKitClass+DataFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LogKitClass+DataFile.swift"; sourceTree = "<group>"; };
+		AEBE0E9F2A052A5500EB603C /* LogKitClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogKitClass.swift; sourceTree = "<group>"; };
+		AEBE0EA02A052A5500EB603C /* LogKitClass+LogFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LogKitClass+LogFile.swift"; sourceTree = "<group>"; };
 		AEFD199629FAA46A004D52A3 /* Project-Hub-Max.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project-Hub-Max.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEFD199929FAA46A004D52A3 /* Project_Hub_MaxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_Hub_MaxApp.swift; sourceTree = "<group>"; };
 		AEFD199B29FAA46A004D52A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,7 +87,7 @@
 		AEFD19C729FAA682004D52A3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		AEFD19D329FAB745004D52A3 /* PeripheralDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralDetails.swift; sourceTree = "<group>"; };
 		AEFD19D729FABA8C004D52A3 /* ServiceDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetails.swift; sourceTree = "<group>"; };
-		AEFD19DB29FABCE7004D52A3 /* Interract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interract.swift; sourceTree = "<group>"; };
+		AEFD19DB29FABCE7004D52A3 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		AEFD19E029FABDC5004D52A3 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		AEFD19E929FAC5F2004D52A3 /* Ble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ble.swift; sourceTree = "<group>"; };
 		AEFD19ED29FAC694004D52A3 /* Ble+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ble+Delegate.swift"; sourceTree = "<group>"; };
@@ -114,6 +120,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AEBE0E9D2A052A4600EB603C /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				AEBE0E9F2A052A5500EB603C /* LogKitClass.swift */,
+				AEBE0E9E2A052A5500EB603C /* LogKitClass+DataFile.swift */,
+				AEBE0EA02A052A5500EB603C /* LogKitClass+LogFile.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
 		AEFD198D29FAA46A004D52A3 = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +153,7 @@
 		AEFD199829FAA46A004D52A3 /* Project-Hub-Max */ = {
 			isa = PBXGroup;
 			children = (
+				AEBE0E9D2A052A4600EB603C /* Logger */,
 				AEAC6E5429FAF57600DE7CB5 /* Info.plist */,
 				AEFD199929FAA46A004D52A3 /* Project_Hub_MaxApp.swift */,
 				AEFD19F529FACDD2004D52A3 /* Resource */,
@@ -179,7 +196,7 @@
 				AEFD19D329FAB745004D52A3 /* PeripheralDetails.swift */,
 				AEFD19C729FAA682004D52A3 /* MainView.swift */,
 				AEFD19D729FABA8C004D52A3 /* ServiceDetails.swift */,
-				AEFD19DB29FABCE7004D52A3 /* Interract.swift */,
+				AEFD19DB29FABCE7004D52A3 /* LogView.swift */,
 				AEFD199B29FAA46A004D52A3 /* ContentView.swift */,
 			);
 			path = Views;
@@ -340,10 +357,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEFD19D829FABA8C004D52A3 /* ServiceDetails.swift in Sources */,
+				AEBE0EA32A052A5500EB603C /* LogKitClass+LogFile.swift in Sources */,
 				AEFD19D429FAB745004D52A3 /* PeripheralDetails.swift in Sources */,
 				AE5F6C1A29FAF14500FE107E /* Ble+PeripheralManager.swift in Sources */,
 				AEFD19EE29FAC694004D52A3 /* Ble+Delegate.swift in Sources */,
-				AEFD19DC29FABCE7004D52A3 /* Interract.swift in Sources */,
+				AEFD19DC29FABCE7004D52A3 /* LogView.swift in Sources */,
 				AEFD19C829FAA682004D52A3 /* MainView.swift in Sources */,
 				AEFD199C29FAA46A004D52A3 /* ContentView.swift in Sources */,
 				AE2AD5A929FBFAFA00E44AF5 /* Peripheral.swift in Sources */,
@@ -351,8 +369,10 @@
 				AEFD19E129FABDC5004D52A3 /* Config.swift in Sources */,
 				AEFD19EA29FAC5F2004D52A3 /* Ble.swift in Sources */,
 				AEFD19F229FAC854004D52A3 /* Ble+Central.swift in Sources */,
+				AEBE0EA22A052A5500EB603C /* LogKitClass.swift in Sources */,
 				AE21C72E29FC1F4B00719FF0 /* CharacteristicProperty.swift in Sources */,
 				AE6F454329FC326300BD2E60 /* Ble+Peripheral.swift in Sources */,
+				AEBE0EA12A052A5500EB603C /* LogKitClass+DataFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +382,7 @@
 			files = (
 				AEFD19AB29FAA46A004D52A3 /* Project_Hub_MaxTests.swift in Sources */,
 				AEFD19C929FAA682004D52A3 /* MainView.swift in Sources */,
-				AEFD19DD29FABCE7004D52A3 /* Interract.swift in Sources */,
+				AEFD19DD29FABCE7004D52A3 /* LogView.swift in Sources */,
 				AEFD19D529FAB745004D52A3 /* PeripheralDetails.swift in Sources */,
 				AEFD19D929FABA8C004D52A3 /* ServiceDetails.swift in Sources */,
 				AEFD19E229FABDC5004D52A3 /* Config.swift in Sources */,
@@ -379,7 +399,7 @@
 				AEFD19DA29FABA8C004D52A3 /* ServiceDetails.swift in Sources */,
 				AEFD19D629FAB745004D52A3 /* PeripheralDetails.swift in Sources */,
 				AEFD19F029FAC694004D52A3 /* Ble+Delegate.swift in Sources */,
-				AEFD19DE29FABCE7004D52A3 /* Interract.swift in Sources */,
+				AEFD19DE29FABCE7004D52A3 /* LogView.swift in Sources */,
 				AEFD19CA29FAA682004D52A3 /* MainView.swift in Sources */,
 				AEFD19B529FAA46A004D52A3 /* Project_Hub_MaxUITests.swift in Sources */,
 				AEFD19B729FAA46A004D52A3 /* Project_Hub_MaxUITestsLaunchTests.swift in Sources */,

@@ -2,8 +2,7 @@
 //  Ble+Peripheral.swift
 //  Project-Hub-Max
 //
-//  Created by Raphael Labourel on 27/04/2023.
-//
+
 
 import Foundation
 import CoreBluetooth
@@ -48,10 +47,9 @@ extension Ble: CBPeripheralManagerDelegate {
 					case .writeWithoutResponse: properties.insert(.writeWithoutResponse)
 				}
 				properties.remove(.extendedProperties)
-
-				let cbCharacteristic = CBMutableCharacteristic(type: CBUUID(nsuuid: characteristic.id), properties: properties, value: nil, permissions: permissions)
-				cbCharacteristics.append(cbCharacteristic)
 			}
+            let cbCharacteristic = CBMutableCharacteristic(type: CBUUID(nsuuid: characteristic.id), properties: properties, value: nil, permissions: permissions)
+            cbCharacteristics.append(cbCharacteristic)
 		}
 		service.characteristics = cbCharacteristics
 		self.peripheralManager?.add(service)
@@ -62,11 +60,12 @@ extension Ble: CBPeripheralManagerDelegate {
 	}
 
 	public func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
-        print("request")
         guard (requests.first != nil) else { return }
-        print("passed")
 		for request in requests {
-            (request.characteristic as? CBMutableCharacteristic)?.value = request.value
+            if let value = request.value {
+                (request.characteristic as? CBMutableCharacteristic)?.value = value
+                self.myCharactersticsValues[request.characteristic] = String(data: value, encoding: .utf8)
+            }
             self.delegate?.didReceiveWrite(on: request.characteristic)
 		}
         peripheral.respond(to: requests.first!, withResult: .success)
