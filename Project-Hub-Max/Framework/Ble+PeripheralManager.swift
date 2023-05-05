@@ -10,7 +10,7 @@ import CoreBluetooth
 extension Ble: CBPeripheralManagerDelegate {
 	public func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
 		if peripheral.state == .poweredOn {
-			let advertData = [CBAdvertisementDataLocalNameKey: self.config.myPeripheral.name]
+			let advertData = [CBAdvertisementDataLocalNameKey: self.advertisedName]
 
 			self.peripheralManager?.startAdvertising(advertData)
             initService()

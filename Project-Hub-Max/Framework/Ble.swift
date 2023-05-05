@@ -32,6 +32,8 @@ public class Ble: NSObject, ObservableObject {
 	/// List of my services
 	internal var myServices: [CBMutableService] = []
 
+	internal var advertisedName: String
+
 	/// Delegate to handle events outside of the cle
 	public var delegate: BleDelegate?
 
@@ -50,6 +52,8 @@ public class Ble: NSObject, ObservableObject {
 		self.peripheralManagerDispatchQueue = DispatchQueue(label: "PeripheralManager", qos: .background, attributes: .concurrent, autoreleaseFrequency: .workItem, target: .main)
 		self.bleDispatchQueue = DispatchQueue(label: "Ble", qos: .default, attributes: .concurrent, autoreleaseFrequency: .workItem, target: .main)
 
+		self.advertisedName = self.config.myPeripheral.name
+
 		super.init()
 
 		self.centralManager = CBCentralManager(delegate: self, queue: self.centralDispatchQueue)
@@ -63,5 +67,14 @@ public class Ble: NSObject, ObservableObject {
 		self.readContent = [:]
 		self.centralManager?.stopScan()
 		self.centralManager?.scanForPeripherals(withServices: nil)
+	}
+
+	public func updateAdvertisedName(new name: String) {
+		self.advertisedName = name
+
+		let advertData = [CBAdvertisementDataLocalNameKey: self.advertisedName]
+
+		self.peripheralManager?.startAdvertising(advertData)
+		
 	}
 }
