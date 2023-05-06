@@ -9,29 +9,38 @@ struct LogView: View {
 	@EnvironmentObject var logger: LogKit
 	@State private var isAlertShowing: Bool = false
 
+	private func getLines(from str: String) -> [String] {
+		return str.components(separatedBy: .newlines).reversed().filter({$0.isEmpty == false})
+	}
+
+	private func getTextColor(using line: String) -> Color {
+		if line.contains("`INFO`") {
+			return .accentColor
+		}
+		if line.contains("`LOG`") {
+			return .white
+		}
+		if line.contains("`ERROR`") {
+			return .red
+		}
+		return .white
+	}
+
     var body: some View {
-		ScrollView {
-			if logger.isUpdating == false {
-				Text(logger.getLogFileContent())
-					.padding()
-			}
-		}
-		.refreshable {
-			logger.isUpdating = true
-			logger.isUpdating = false
-		}
-		.onAppear {
-			logger.isUpdating = true
-			logger.isUpdating = false
-		}
-		.alert("Would you like to clear the log file", isPresented: $isAlertShowing) {
-			Button("Yes", role: .destructive, action: {
-				logger.deleteFile(at: logger.logFileURL)
+		if logger.isUpdating == false {
+			List(getLines(from: logger.getLogFileContent()), id: \.self, rowContent: { line in
+				Text(line)
+					.foregroundColor(getTextColor(using: line))
 			})
-			Button("No", role: .cancel, action: {})
+			.alert("Would you like to clear the log file", isPresented: $isAlertShowing) {
+				Button("Yes", role: .destructive, action: {
+					logger.deleteFile(at: logger.logFileURL)
+				})
+				Button("No", role: .cancel, action: {})
+			}
+			.onTapGesture(count: 3, perform: {
+				isAlertShowing.toggle()
+			})
 		}
-		.onLongPressGesture(perform: {
-			isAlertShowing.toggle()
-		})
     }
 }

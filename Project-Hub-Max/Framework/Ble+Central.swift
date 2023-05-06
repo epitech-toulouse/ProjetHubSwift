@@ -22,6 +22,7 @@ extension Ble: CBCentralManagerDelegate {
 		let isToFind: CFPeripheral? = self.config.findPeripheral(with: name)
 
 		self.peripherals.append(Peripheral(cfPeripheral: isToFind, cbPeripheral: peripheral))
+		self.connectionStatus[self.peripherals.last!] = .Disconnected
 		self.delegate?.didDiscoverPeripheral(discovered: self.peripherals.last!)
 		self.bleDispatchQueue.async {
 			if peripheral.state != .disconnected {

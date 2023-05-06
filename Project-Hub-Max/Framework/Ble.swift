@@ -29,6 +29,8 @@ public class Ble: NSObject, ObservableObject {
 	/// The lsit of all my own charactertics values
 	@Published public var myCharactersticsValues: [CBCharacteristic : String] = [:]
 
+	@Published public var mySubscribedList: [CBCharacteristic] = []
+
 	/// List of my services
 	internal var myServices: [CBMutableService] = []
 
@@ -62,9 +64,15 @@ public class Ble: NSObject, ObservableObject {
 
 	/// refresh the list of peripherals detected and connected
 	public func refreshPeripheralList() {
+		for (peripheral, status) in self.connectionStatus {
+			if status == .Connected {
+				self.disconnectFromPeripheral(peripheral: peripheral)
+			}
+		}
 		self.peripherals = []
 		self.connectionStatus = [:]
 		self.readContent = [:]
+		self.mySubscribedList = []
 		self.centralManager?.stopScan()
 		self.centralManager?.scanForPeripherals(withServices: nil)
 	}

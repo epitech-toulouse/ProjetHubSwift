@@ -20,10 +20,10 @@ public protocol BleDelegate {
 
 	/// Callled when amy peripheral is all set up and started to adverstise its name
 	func didStartAdvertising(peripheral: CBPeripheralManager)
-	/// Callled when my peripheral subscribed to a characteristic
-	func didSubscribeTo(characteristic: CBCharacteristic)
-	/// Callled when my peripheral unsubscribed to a characteristic
-	func didUnsubscribeFrom(characteristic: CBCharacteristic)
+	/// Callled when a peripheral subscribed to one of my characteristic
+	func didGotSubscribedTo(characteristic: CBCharacteristic)
+	/// Callled when a peripheral unsubscribed to one of my characteristic
+	func didGotUnsubscribedFrom(characteristic: CBCharacteristic)
 	/// Callled when my peripheral received a write on a characteristic
 	func didReceiveWrite(on characteristic: CBCharacteristic)
 	/// Callled when my peripheral received a read on a characteristic

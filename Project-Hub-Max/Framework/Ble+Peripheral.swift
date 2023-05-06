@@ -102,5 +102,15 @@ extension Ble: CBPeripheralDelegate {
 	///  - characteristic: The charactersitic to subscribe to
 	public func subscribeToCharacteristic(from peripheral: Peripheral, characteristic: CBCharacteristic) {
 		peripheral.cbPeripheral.setNotifyValue(true, for: characteristic)
+		self.mySubscribedList.append(characteristic)
+	}
+
+	/// Unsubscribe to a characterisc, enable the notification when the value changes
+	/// - Parameters:
+	///  - peripheral: The peripheral containung the characteristic
+	///  - characteristic: The charactersitic to unsubscribe from
+	public func unsubscribeFromCharacteristic(from peripheral: Peripheral, characteristic: CBCharacteristic) {
+		peripheral.cbPeripheral.setNotifyValue(false, for: characteristic)
+		self.mySubscribedList.removeAll(where: {$0 == characteristic})
 	}
 }

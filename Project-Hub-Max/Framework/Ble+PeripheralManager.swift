@@ -83,10 +83,10 @@ extension Ble: CBPeripheralManagerDelegate {
 	}
 
     public func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        self.delegate?.didSubscribeTo(characteristic: characteristic)
+        self.delegate?.didGotSubscribedTo(characteristic: characteristic)
     }
 
     public func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
-        self.delegate?.didUnsubscribeFrom(characteristic: characteristic)
+        self.delegate?.didGotUnsubscribedFrom(characteristic: characteristic)
     }
 }

@@ -52,7 +52,11 @@ struct CharacteristicsDetail: View {
 							.buttonStyle(MyButtonStyle())
 					}
 					if characteristic.properties.contains(.notify) {
-						Button("Subscribe", action: {
+						Button(ble.mySubscribedList.contains(where: {$0 == characteristic}) ? "Unsubscribe" : "Subscribe", action: {
+							if ble.mySubscribedList.contains(where: {$0 == characteristic}) {
+								ble.unsubscribeFromCharacteristic(from: peripheral, characteristic: characteristic)
+								return
+							}
 							ble.subscribeToCharacteristic(from: peripheral, characteristic: characteristic)
 						})
 							.buttonStyle(MyButtonStyle())
@@ -87,8 +91,8 @@ struct CharacteristicsDetail: View {
 	}
 }
 
-struct MyButtonStyle: ButtonStyle {
-	func makeBody(configuration: Configuration) -> some View {
+public struct MyButtonStyle: ButtonStyle {
+	public func makeBody(configuration: Configuration) -> some View {
 		configuration.label
 			.padding()
 			.background(.regularMaterial, in: Capsule())

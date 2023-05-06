@@ -58,18 +58,19 @@ extension Project_Hub_MaxApp: BleDelegate {
 		self.logger.info(message: "Did start advertising as \(ble.config.myPeripheral.name)")
 	}
 
-	func didSubscribeTo(characteristic: CBCharacteristic) {
-		self.logger.log(message: "Successfully subscribe to \(String(describing: characteristic.uuid.uuidString))")
+	func didGotSubscribedTo(characteristic: CBCharacteristic) {
+		self.logger.log(message: "Successfully got subscribed to \(String(describing: characteristic.uuid.uuidString))")
 	}
 
-	func didUnsubscribeFrom(characteristic: CBCharacteristic) {
-		self.logger.log(message: "Successfully unsubscribe from \(String(describing: characteristic.uuid.uuidString))")
+	func didGotUnsubscribedFrom(characteristic: CBCharacteristic) {
+		self.logger.log(message: "Successfully got unsubscribed from \(String(describing: characteristic.uuid.uuidString))")
 	}
 
 	func didReceiveWrite(on characteristic: CBCharacteristic) {
 		guard let value = characteristic.value else { return }
+		guard let message = String(data: value, encoding: .utf8) else { return }
 
-		self.logger.log(message: "Did receive write \(String(describing: String(data: value, encoding: .utf8))) on characteristic \(characteristic.uuid.uuidString)")
+		self.logger.log(message: "Did receive write \(message) on characteristic \(characteristic.uuid.uuidString)")
 	}
 
 	func didReceiveRead(on characteristic: CBCharacteristic) {

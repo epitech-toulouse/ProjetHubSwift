@@ -2,25 +2,27 @@
 //  ContentView.swift
 //  Project-Hub-Max
 //
-//  Created by Raphael Labourel on 27/04/2023.
-//
 
 import SwiftUI
 
 struct ContentView: View {
+
     var body: some View {
 		TabView {
 			MainView()
+				.toolbarBackground(.visible, for: .tabBar)
 				.tabItem {
 					Label("Menu", systemImage: "list.dash")
 				}
 			MyPeripheralDetails()
+				.toolbarBackground(.visible, for: .tabBar)
 				.tabItem {
 					Label("My Services", systemImage: "person.crop.circle")
 				}
 			LogView()
+				.toolbarBackground(.visible, for: .tabBar)
 				.tabItem {
-					Label("Interract", systemImage: "square.and.pencil")
+					Label("Log", systemImage: "square.and.pencil")
 				}
 		}
     }
